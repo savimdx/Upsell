@@ -1,0 +1,8 @@
+{
+  "name": "Upsell +1000 Sesiones de Entrenamiento de Fútbol Sala",
+  "description": "Página de ventas optimizada y de alta conversión para entrenadores de fútbol sala, profesores y escuelas deportivas.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
