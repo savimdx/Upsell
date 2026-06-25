@@ -25,6 +25,7 @@ import {
   FileText
 } from 'lucide-react';
 
+
 interface UpsellRFEFProps {
   onAccept: () => void;
   onDecline: () => void;
@@ -45,6 +46,53 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
     }
     return () => clearInterval(interval);
   }, [isPlaying]);
+
+  // Load Hotmart Sales Funnel script and initialize widget
+  useEffect(() => {
+    const scriptId = 'hotmart-checkout-elements-script';
+    let script = document.getElementById(scriptId) as HTMLScriptElement;
+
+    const initWidget = () => {
+      if ((window as any).checkoutElements) {
+        try {
+          // Clear any existing contents just in case
+          const container = document.getElementById('hotmart-sales-funnel');
+          if (container) {
+            container.innerHTML = '';
+          }
+          (window as any).checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+        } catch (err) {
+          console.error("Error initializing Hotmart widget:", err);
+        }
+      }
+    };
+
+    if (!script) {
+      script = document.createElement('script');
+      script.id = scriptId;
+      script.src = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
+      script.async = true;
+      script.onload = () => {
+        initWidget();
+      };
+      document.body.appendChild(script);
+    } else {
+      // Script is already in DOM, check if checkoutElements exists and init
+      if ((window as any).checkoutElements) {
+        // Give a tiny timeout for DOM to render the container
+        const timer = setTimeout(initWidget, 50);
+        return () => clearTimeout(timer);
+      } else {
+        script.addEventListener('load', initWidget);
+      }
+    }
+
+    return () => {
+      if (script) {
+        script.removeEventListener('load', initWidget);
+      }
+    };
+  }, []);
 
   const tacticalPlays = [
     {
@@ -159,9 +207,9 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
             {/* The PDF Mockup image requested by user */}
             <div className="relative group cursor-pointer overflow-hidden rounded-2xl bg-slate-950/50 p-2 border border-slate-800/60 shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
               <img 
-                src="https://i.ibb.co/KchjnPqV/Chat-GPT-Image-25-de-jun-de-2026-12-56-09.png" 
+                src="https://i.ibb.co/nHLxYF9/Chat-GPT-Image-25-de-jun-de-2026-12-56-09.png" 
                 alt="Biblioteca Profesional de Entrenamientos de Fútbol Sala Mockup" 
-                className="w-full max-w-[280px] sm:max-w-[340px] h-auto object-contain rounded-xl transition-transform duration-500 group-hover:scale-[1.03]"
+                className="max-w-full h-auto object-contain rounded-xl transition-transform duration-500 group-hover:scale-[1.03]"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-xl"></div>
@@ -559,19 +607,8 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
 
           {/* Checkout & reject buttons */}
           <div className="max-w-xl mx-auto space-y-4">
-            <a
-              href="https://pay.hotmart.com/D106487063G?off=4ovfomq3"
-              className="w-full flex items-center justify-center py-4.5 rounded-xl bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 text-white font-black text-sm sm:text-base tracking-widest uppercase hover:brightness-110 active:scale-[0.99] transition-all shadow-xl shadow-orange-600/10 cursor-pointer transform duration-150 animate-pulse border border-orange-500/30 text-center"
-            >
-              <span>Sí, Quiero Mi Biblioteca Profesional Ahora</span>
-            </a>
-
-            <button
-              onClick={onDecline}
-              className="text-xs text-slate-500 hover:text-slate-300 underline font-medium cursor-pointer transition-colors block mx-auto py-1"
-            >
-              No, gracias. Prefiero ignorar esta biblioteca táctica de ejercicios de fútbol y continuar con mi compra básica.
-            </button>
+            {/* HOTMART - Sales Funnel Widget */}
+            <div id="hotmart-sales-funnel" className="w-full flex justify-center min-h-[80px]"></div>
           </div>
 
           {/* SSL and security indicators */}
