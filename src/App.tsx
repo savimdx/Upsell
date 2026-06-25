@@ -102,7 +102,7 @@ export default function App() {
                     <span className="text-emerald-500">✓</span>
                     <span>Megapack +1000 Sesiones de Fútbol Sala</span>
                   </div>
-                  <span className="font-bold font-mono text-slate-400">$5.90 USD</span>
+                  <span className="font-bold font-mono text-slate-400">$6.90 USD</span>
                 </li>
 
                 {viewMode === 'thankyou_accepted' ? (
@@ -127,7 +127,7 @@ export default function App() {
               <div className="border-t border-slate-850 pt-3 flex justify-between items-center font-bold text-white text-sm sm:text-base">
                 <span>Total Cargado:</span>
                 <span className="font-mono text-amber-400 text-lg sm:text-xl">
-                  {viewMode === 'thankyou_accepted' ? '$11.80 USD' : '$5.90 USD'}
+                  {viewMode === 'thankyou_accepted' ? '$12.80 USD' : '$6.90 USD'}
                 </span>
               </div>
             </div>

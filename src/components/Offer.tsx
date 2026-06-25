@@ -112,7 +112,7 @@ export default function Offer({ onPurchase }: { onPurchase?: () => void }) {
                 {/* Main Price */}
                 <div className="flex items-baseline justify-center">
                   <span className="text-6xl sm:text-7xl font-black text-orange-600 tracking-tight drop-shadow-sm">
-                    $5.90
+                    $6.90
                   </span>
                   <span className="text-lg sm:text-xl font-extrabold text-orange-500 ml-1.5 font-sans">
                     USD
