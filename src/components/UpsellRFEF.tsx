@@ -298,10 +298,10 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
 
         {/* ================= INTERACTIVE STRATEGY COURT PREVIEW ================= */}
         <div className="bg-slate-950 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
             
             {/* Whiteboard controller */}
-            <div className="col-span-1 lg:col-span-5 space-y-4">
+            <div className="col-span-1 md:col-span-5 space-y-4">
               <span className="inline-flex items-center space-x-1.5 bg-orange-400/10 text-orange-400 border border-orange-400/20 px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider">
                 🥅 SIMULADOR TÁCTICO INTEGRADO
               </span>
@@ -359,7 +359,7 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
             </div>
 
             {/* Tactical Court Graphic Area */}
-            <div className="col-span-1 lg:col-span-7 bg-slate-950 p-4 rounded-2xl border border-slate-800 relative">
+            <div className="col-span-1 md:col-span-7 bg-slate-950 p-4 rounded-2xl border border-slate-800 relative w-full max-w-xl mx-auto">
               
               {/* Internal court representation box */}
               <div className="relative w-full h-[280px] sm:h-[340px] rounded-xl bg-gradient-to-br from-slate-950 to-slate-900 border-2 border-dashed border-orange-900/50 overflow-hidden flex flex-col justify-between p-4">
@@ -559,13 +559,12 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
 
           {/* Checkout & reject buttons */}
           <div className="max-w-xl mx-auto space-y-4">
-            <button
-              onClick={onAccept}
-              className="w-full flex items-center justify-center space-x-3 py-4.5 rounded-xl bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 text-white font-black text-sm sm:text-base tracking-widest uppercase hover:brightness-110 active:scale-[0.99] transition-all shadow-xl shadow-orange-600/10 cursor-pointer transform duration-150 animate-pulse border border-orange-500/30"
+            <a
+              href="https://pay.hotmart.com/D106487063G?off=4ovfomq3"
+              className="w-full flex items-center justify-center py-4.5 rounded-xl bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 text-white font-black text-sm sm:text-base tracking-widest uppercase hover:brightness-110 active:scale-[0.99] transition-all shadow-xl shadow-orange-600/10 cursor-pointer transform duration-150 animate-pulse border border-orange-500/30 text-center"
             >
-              <Check className="h-5 w-5 text-white stroke-[3px]" />
               <span>Sí, Quiero Mi Biblioteca Profesional Ahora</span>
-            </button>
+            </a>
 
             <button
               onClick={onDecline}

@@ -96,29 +96,28 @@ export default function App() {
                 <span>Resumen de tu Pedido</span>
                 <span className="text-amber-400 font-mono text-[10px]">CÓD: RFEF-77291B</span>
               </p>
-              
-              <ul className="space-y-3 text-xs sm:text-sm">
+                            <ul className="space-y-3 text-xs sm:text-sm">
                 <li className="flex justify-between items-center text-slate-200">
                   <div className="flex items-center gap-2">
                     <span className="text-emerald-500">✓</span>
                     <span>Megapack +1000 Sesiones de Fútbol Sala</span>
                   </div>
-                  <span className="font-bold font-mono text-slate-400">$6.90 USD</span>
+                  <span className="font-bold font-mono text-slate-400">$5.90 USD</span>
                 </li>
 
                 {viewMode === 'thankyou_accepted' ? (
                   <li className="flex justify-between items-center text-amber-300 bg-amber-500/5 border border-amber-500/20 p-2.5 rounded-xl">
                     <div className="flex items-center gap-2">
                       <Sparkles className="h-4 w-4 text-amber-400 flex-shrink-0 animate-pulse" />
-                      <span className="font-bold">Estrategias y Tácticas de la RFEF (Manual Oficial)</span>
+                      <span className="font-bold">98 Sesiones de Entrenamiento de la Selección Española Campeona del Mundo 2010</span>
                     </div>
-                    <span className="font-black font-mono text-amber-300">$9.90 USD</span>
+                    <span className="font-black font-mono text-amber-300">$5.90 USD</span>
                   </li>
                 ) : (
                   <li className="flex justify-between items-center text-slate-500 italic p-1 border-t border-slate-850/60 pt-2.5">
                     <div className="flex items-center gap-2">
                       <span className="text-slate-600">✕</span>
-                      <span>Estrategias y Tácticas de la RFEF (Manual Oficial)</span>
+                      <span>98 Sesiones de Entrenamiento de la Selección Española Campeona del Mundo 2010</span>
                     </div>
                     <span className="text-[10px] uppercase font-mono tracking-widest font-bold text-slate-600">Rechazado</span>
                   </li>
@@ -128,26 +127,18 @@ export default function App() {
               <div className="border-t border-slate-850 pt-3 flex justify-between items-center font-bold text-white text-sm sm:text-base">
                 <span>Total Cargado:</span>
                 <span className="font-mono text-amber-400 text-lg sm:text-xl">
-                  {viewMode === 'thankyou_accepted' ? '$16.80 USD' : '$6.90 USD'}
+                  {viewMode === 'thankyou_accepted' ? '$11.80 USD' : '$5.90 USD'}
                 </span>
               </div>
             </div>
 
             {/* Simulated Downloads Block */}
             <div className="space-y-3">
-              <p className="text-xs text-slate-400 font-mono uppercase tracking-widest">
+              <p className="text-sm sm:text-base text-amber-400 font-black uppercase tracking-wider bg-amber-500/10 py-2.5 px-4 rounded-xl border border-amber-500/20 inline-block">
                 📥 ACCESO DE DESCARGA INSTANTÁNEO
               </p>
               
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <button 
-                  onClick={() => alert("Simulación de Descarga: El Megapack de Sesiones se ha descargado correctamente.")}
-                  className="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-750 text-white font-extrabold text-xs uppercase tracking-widest transition-all flex items-center justify-center gap-2 cursor-pointer border border-slate-700"
-                >
-                  <Download className="h-4 w-4" />
-                  <span>Descargar Sesiones</span>
-                </button>
-
                 {viewMode === 'thankyou_accepted' && (
                   <button 
                     onClick={() => alert("Simulación de Descarga: El Manual Oficial RFEF se ha descargado correctamente.")}
@@ -166,7 +157,7 @@ export default function App() {
                 onClick={() => setViewMode('upsell')}
                 className="text-xs text-slate-500 hover:text-slate-400 underline font-medium cursor-pointer transition-colors"
               >
-                Volver a la página de la oferta táctica de Upsell
+                Volver a la página anterior
               </button>
             </div>
 
