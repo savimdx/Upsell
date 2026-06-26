@@ -77,6 +77,10 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
     return () => cancelAnimationFrame(animationFrameId);
   }, [isUserInteracting]);
 
+  const handleMouseEnter = () => {
+    setIsUserInteracting(true);
+  };
+
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     const container = scrollContainerRef.current;
     if (!container) return;
@@ -93,9 +97,6 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
 
   const handleMouseUp = () => {
     isDownRef.current = false;
-    setTimeout(() => {
-      setIsUserInteracting(false);
-    }, 1200);
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -375,6 +376,7 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
             {/* Marquee Wrapper with Drag & Touch Support */}
             <div 
               ref={scrollContainerRef}
+              onMouseEnter={handleMouseEnter}
               onMouseDown={handleMouseDown}
               onMouseLeave={handleMouseLeave}
               onMouseUp={handleMouseUp}
@@ -405,10 +407,6 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
                   />
                 </div>
               ))}
-            </div>
-
-            <div className="text-[10px] sm:text-xs text-slate-500 font-medium tracking-wide mt-4 animate-pulse">
-              👋 Arrastra con el cursor o desliza con el dedo para navegar
             </div>
           </div>
         </div>
