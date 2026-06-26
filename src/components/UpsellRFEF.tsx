@@ -31,6 +31,13 @@ interface UpsellRFEFProps {
   onDecline: () => void;
 }
 
+const previewImages = [
+  "https://i.ibb.co/s98XHnxN/Screenshot-20260626-130203-Adobe-Acrobat.jpg",
+  "https://i.ibb.co/FbbFn9Ft/Screenshot-20260626-130208-Adobe-Acrobat.jpg",
+  "https://i.ibb.co/FbNbq0cV/Screenshot-20260626-130250-Adobe-Acrobat.jpg",
+  "https://i.ibb.co/7drfv4kn/Screenshot-20260626-130419-Adobe-Acrobat.jpg"
+];
+
 export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
   const [selectedTopic, setSelectedModule] = useState(0);
   const [tacticalStep, setTacticalStep] = useState(0);
@@ -133,32 +140,7 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
     }
   ];
 
-  const libraryContents = [
-    {
-      title: "98 Sesiones Listas para Aplicar",
-      badge: "Estructura Práctica",
-      desc: "Sesiones completas cronometradas paso a paso, con instrucciones claras sobre cantidad de jugadores, dimensiones del espacio y tiempos de descanso.",
-      details: ["Planificación de sesiones de 60, 75 y 90 minutos.", "Ejercicios modulables según tu categoría de trabajo.", "Esquemas de progresión de menor a mayor complejidad física."]
-    },
-    {
-      title: "Ejercicios Defensivos y de Presión Alta",
-      badge: "Fase Defensiva",
-      desc: "Diseños estratégicos para ahogar la salida del rival, forzar pérdidas en cancha contraria y estructurar el repliegue defensivo de inmediato.",
-      details: ["Transición defensiva acelerada de 'La Furia'.", "Organización en rombo defensivo ultra agresivo.", "Ejercicios específicos de marcaje 1 vs 1 y coberturas."]
-    },
-    {
-      title: "Circuitos de Finalización y Bote Pronto",
-      badge: "Fase de Ataque",
-      desc: "Dinámicas dinámicas para mejorar la efectividad frente al marco rival, incluyendo remates de volea, jugadas al segundo palo y desmarques de ruptura.",
-      details: ["Ejercicios de tiro bajo condiciones de fatiga extrema.", "Movimientos específicos del pívot para fijar y descargar.", "Transiciones rápidas de 2 vs 1 y superioridades 3 vs 2."]
-    },
-    {
-      title: "Juegos Reducidos y Entrenamiento Integrado",
-      badge: "Metodología",
-      desc: "Aumenta la toma de decisiones y el nivel de concentración de tus jugadores mediante situaciones reales de juego en espacios condicionados.",
-      details: ["Reglas de provocación para forzar comportamientos.", "Ejercicios de posesión con comodines externos.", "Acondicionamiento físico de alta intensidad con balón."]
-    }
-  ];
+
 
   return (
     <div className="relative min-h-screen bg-slate-950 text-slate-100 antialiased overflow-x-hidden selection:bg-orange-500 selection:text-white font-sans pb-24">
@@ -231,263 +213,38 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
           </div>
 
           {/* Quick value features list */}
-          <div className="col-span-1 md:col-span-7 space-y-5">
+          <div className="col-span-1 md:col-span-7 space-y-5 text-center flex flex-col items-center justify-center">
             <h3 className="text-2xl font-black text-white tracking-tight uppercase">
               La Biblioteca Táctica Más Completa
             </h3>
-            
-            <p className="text-sm text-slate-300 leading-relaxed">
-              Muchos directores técnicos dominan la pizarra teórica y analizan videos por horas, pero fallan en lo más importante: <strong className="text-orange-300">cómo estructurar esa teoría en ejercicios prácticos reales de alta intensidad</strong>. 
-            </p>
-            <p className="text-sm text-slate-300 leading-relaxed">
-              Esta biblioteca profesional resuelve ese problema de raíz. Consigues 98 fichas de entrenamiento desglosadas que cubren todas las fases tácticas esenciales.
-            </p>
 
-            {/* Quick specifications grid */}
-            <div className="grid grid-cols-2 gap-3 pt-2">
-              <div className="flex items-center space-x-2 text-xs text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
+            {/* Quick specifications list - stacked vertically, orange checks, larger text */}
+            <div className="flex flex-col space-y-3.5 pt-3 w-full max-w-md">
+              <div className="flex items-center justify-center space-x-3 text-base sm:text-lg text-slate-200 font-medium">
+                <Check className="h-5.5 w-5.5 text-orange-500 flex-shrink-0" />
                 <span>98 Ejercicios Prácticos</span>
               </div>
-              <div className="flex items-center space-x-2 text-xs text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
+              <div className="flex items-center justify-center space-x-3 text-base sm:text-lg text-slate-200 font-medium">
+                <Check className="h-5.5 w-5.5 text-orange-500 flex-shrink-0" />
                 <span>Fórmula Ofensiva y Defensiva</span>
               </div>
-              <div className="flex items-center space-x-2 text-xs text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
+              <div className="flex items-center justify-center space-x-3 text-base sm:text-lg text-slate-200 font-medium">
+                <Check className="h-5.5 w-5.5 text-orange-500 flex-shrink-0" />
                 <span>Transiciones y Contragolpe</span>
               </div>
-              <div className="flex items-center space-x-2 text-xs text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
+              <div className="flex items-center justify-center space-x-3 text-base sm:text-lg text-slate-200 font-medium">
+                <Check className="h-5.5 w-5.5 text-orange-500 flex-shrink-0" />
                 <span>Entrenamiento Integrado</span>
               </div>
-              <div className="flex items-center space-x-2 text-xs text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
+              <div className="flex items-center justify-center space-x-3 text-base sm:text-lg text-slate-200 font-medium">
+                <Check className="h-5.5 w-5.5 text-orange-500 flex-shrink-0" />
                 <span>Juegos Reducidos (Small-Sided)</span>
               </div>
-              <div className="flex items-center space-x-2 text-xs text-slate-300">
-                <span className="h-1.5 w-1.5 rounded-full bg-orange-500"></span>
+              <div className="flex items-center justify-center space-x-3 text-base sm:text-lg text-slate-200 font-medium">
+                <Check className="h-5.5 w-5.5 text-orange-500 flex-shrink-0" />
                 <span>Sistemas 4-0 y 3-1 Pivot</span>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* ================= THE PROBLEM SECTION ================= */}
-        <div className="bg-slate-950/60 border border-slate-800 rounded-3xl p-6 sm:p-8 space-y-6">
-          <div className="max-w-3xl mx-auto space-y-4 text-center">
-            <h3 className="text-xl sm:text-2xl font-black text-white uppercase tracking-tight">
-              ¿Por Qué la Mayoría de los Entrenadores Fallan en la Cancha?
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-              Es muy fácil estudiar tácticas de élite sobre la pizarra, ver conferencias de fútbol o descargar teorías abstractas de internet. Sin embargo, al pisar la cancha se presenta el gran abismo: <strong className="text-orange-400 font-bold">no saber cómo transformar esa pizarra teórica en ejercicios dinámicos de alta transferencia.</strong>
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 text-xs sm:text-sm">
-            <div className="bg-slate-950/90 border border-slate-900 p-5 rounded-2xl space-y-2">
-              <span className="text-red-400 font-bold tracking-widest font-mono text-[10px] block">CRISIS DE PLANIFICACIÓN</span>
-              <h4 className="font-extrabold text-white">Ejercicios Monótonos</h4>
-              <p className="text-slate-400 text-xs">Tus jugadores pierden interés rápidamente cuando los circuitos son repetitivos, disminuyendo su nivel de atención y asimilación táctica.</p>
-            </div>
-
-            <div className="bg-slate-950/90 border border-slate-900 p-5 rounded-2xl space-y-2">
-              <span className="text-red-400 font-bold tracking-widest font-mono text-[10px] block">FALTA DE DINAMISMO</span>
-              <h4 className="font-extrabold text-white">Desconexión Teórica</h4>
-              <p className="text-slate-400 text-xs">Miras jugadas maravillosas del 4-0 de selecciones profesionales pero tu equipo no logra plasmarlo bajo presión ni en inferioridad numérica.</p>
-            </div>
-
-            <div className="bg-slate-950/90 border border-slate-900 p-5 rounded-2xl space-y-2">
-              <span className="text-red-400 font-bold tracking-widest font-mono text-[10px] block">PÉRDIDA DE EFECTIVIDAD</span>
-              <h4 className="font-extrabold text-white">Bajo Ritmo de Juego</h4>
-              <p className="text-slate-400 text-xs">El equipo entrena lento, por lo que juega lento en los minutos finales del partido cuando la fatiga física y mental se hace notar.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* ================= THE SOLUTION SECTION ================= */}
-        <div className="bg-gradient-to-br from-orange-950/20 via-slate-950/80 to-orange-950/20 border border-orange-900/30 rounded-3xl p-6 sm:p-8 space-y-8">
-          <div className="text-center space-y-2 max-w-2xl mx-auto">
-            <span className="text-xs font-bold font-mono text-orange-400 uppercase tracking-widest block">LA SOLUCIÓN PROFESIONAL</span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white uppercase">Biblioteca Profesional de Entrenamientos</h2>
-            <p className="text-xs sm:text-sm text-slate-300">
-              Ejercicios prácticos de fútbol listos para aplicar que conectan perfectamente la teoría de la pizarra con la acción real de la cancha.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-850 space-y-2">
-              <div className="h-8 w-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400 font-black text-xs font-mono">98</div>
-              <h4 className="font-black text-white text-xs sm:text-sm uppercase tracking-tight">Sesiones Profesionales</h4>
-              <p className="text-slate-400 text-xs leading-relaxed">Fichas descriptivas diseñadas para asimilación táctica fluida y rápida.</p>
-            </div>
-
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-850 space-y-2">
-              <div className="h-8 w-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400"><Check className="h-4 w-4" /></div>
-              <h4 className="font-black text-white text-xs sm:text-sm uppercase tracking-tight">Listos para Aplicar</h4>
-              <p className="text-slate-400 text-xs leading-relaxed">Solo abre en tu móvil, marca las dimensiones en la cancha y dirige.</p>
-            </div>
-
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-850 space-y-2">
-              <div className="h-8 w-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400"><Layers className="h-4 w-4" /></div>
-              <h4 className="font-black text-white text-xs sm:text-sm uppercase tracking-tight">Organización Élite</h4>
-              <p className="text-slate-400 text-xs leading-relaxed">Desglosado por objetivos de juego para no perder tiempo de preparación.</p>
-            </div>
-
-            <div className="bg-slate-950 p-5 rounded-2xl border border-slate-850 space-y-2">
-              <div className="h-8 w-8 rounded-lg bg-orange-500/10 flex items-center justify-center text-orange-400"><Activity className="h-4 w-4" /></div>
-              <h4 className="font-black text-white text-xs sm:text-sm uppercase tracking-tight">Resultados de Impacto</h4>
-              <p className="text-slate-400 text-xs leading-relaxed">Tus jugadores entenderán los principios de rotación, presión y marca de inmediato.</p>
-            </div>
-
-          </div>
-        </div>
-
-        {/* ================= INTERACTIVE STRATEGY COURT PREVIEW ================= */}
-        <div className="bg-slate-950 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-            
-            {/* Whiteboard controller */}
-            <div className="col-span-1 md:col-span-5 space-y-4">
-              <span className="inline-flex items-center space-x-1.5 bg-orange-400/10 text-orange-400 border border-orange-400/20 px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider">
-                🥅 SIMULADOR TÁCTICO INTEGRADO
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black text-white uppercase">
-                Visualiza el Movimiento Antes de la Cancha
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
-                El manual desglosa las rotaciones mediante diagramas de campo exactos. Conoce cómo se estructuran las 4 fases de la jugada del sistema 3-1 presionando los botones de abajo.
-              </p>
-
-              {/* Steps control selectors */}
-              <div className="space-y-1.5 pt-2">
-                {tacticalPlays.map((play, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => {
-                      setTacticalStep(idx);
-                      setIsPlaying(false);
-                    }}
-                    className={`w-full text-left p-3 rounded-xl border transition-all text-xs cursor-pointer flex items-center justify-between ${
-                      tacticalStep === idx 
-                        ? 'bg-orange-950/80 border-orange-500/50 text-white font-extrabold'
-                        : 'bg-slate-900/40 border-slate-900 text-slate-400 hover:bg-slate-900 hover:text-slate-200'
-                    }`}
-                  >
-                    <span>{play.title}</span>
-                    <ChevronRight className={`h-3 w-3 ${tacticalStep === idx ? 'text-orange-400' : 'text-slate-600'}`} />
-                  </button>
-                ))}
-              </div>
-
-              {/* Auto play switch */}
-              <div className="pt-2 flex items-center justify-between">
-                <button
-                  onClick={() => setIsPlaying(!isPlaying)}
-                  className={`px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-widest cursor-pointer transition-all flex items-center gap-1.5 ${
-                    isPlaying 
-                      ? 'bg-orange-500 text-slate-950 font-black' 
-                      : 'bg-slate-900 border border-slate-800 hover:bg-slate-800 text-slate-300'
-                  }`}
-                >
-                  <Play className={`h-3 w-3 ${isPlaying ? 'fill-slate-950' : ''}`} />
-                  <span>{isPlaying ? 'Pausar Simulación' : 'Animar Jugada'}</span>
-                </button>
-
-                <button
-                  onClick={() => setTacticalStep(0)}
-                  className="p-2 rounded-lg bg-slate-900 border border-slate-850 hover:bg-slate-800 text-slate-400 transition-colors"
-                  title="Reiniciar"
-                >
-                  <RotateCcw className="h-3.5 w-3.5" />
-                </button>
-              </div>
-
-            </div>
-
-            {/* Tactical Court Graphic Area */}
-            <div className="col-span-1 md:col-span-7 bg-slate-950 p-4 rounded-2xl border border-slate-800 relative w-full max-w-xl mx-auto">
-              
-              {/* Internal court representation box */}
-              <div className="relative w-full h-[280px] sm:h-[340px] rounded-xl bg-gradient-to-br from-slate-950 to-slate-900 border-2 border-dashed border-orange-900/50 overflow-hidden flex flex-col justify-between p-4">
-                
-                {/* Court markings */}
-                <div className="absolute inset-0 z-0 pointer-events-none opacity-20">
-                  {/* Center line */}
-                  <div className="absolute top-1/2 left-0 right-0 h-0.5 bg-orange-500"></div>
-                  {/* Center circle */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-20 w-20 rounded-full border-2 border-orange-500"></div>
-                  {/* Outer circle spot */}
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-2 w-2 rounded-full bg-orange-500"></div>
-                  
-                  {/* Penalty area Top */}
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 h-24 w-40 rounded-b-full border-b-2 border-x-2 border-orange-500"></div>
-                  {/* Penalty area Bottom */}
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-24 w-40 rounded-t-full border-t-2 border-x-2 border-orange-500"></div>
-                  {/* Penalty spots */}
-                  <div className="absolute top-16 left-1/2 -translate-x-1/2 h-1.5 w-1.5 rounded-full bg-orange-400"></div>
-                  <div className="absolute bottom-16 left-1/2 -translate-x-1/2 h-1.5 w-1.5 rounded-full bg-orange-400"></div>
-                </div>
-
-                {/* Tactical Active Players Nodes */}
-                <div className="absolute inset-0 z-10">
-                  
-                  {/* Player Cierre */}
-                  <div 
-                    style={{ left: tacticalPlays[tacticalStep].c.x, top: tacticalPlays[tacticalStep].c.y }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 h-7 w-7 rounded-full bg-orange-600 border border-orange-400 flex items-center justify-center text-[10px] font-black text-white shadow-lg transition-all duration-700 ease-out"
-                  >
-                    C
-                  </div>
-
-                  {/* Player Ala Izquierda */}
-                  <div 
-                    style={{ left: tacticalPlays[tacticalStep].ai.x, top: tacticalPlays[tacticalStep].ai.y }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 h-7 w-7 rounded-full bg-orange-600 border border-orange-400 flex items-center justify-center text-[10px] font-black text-white shadow-lg transition-all duration-700 ease-out"
-                  >
-                    AI
-                  </div>
-
-                  {/* Player Ala Derecha */}
-                  <div 
-                    style={{ left: tacticalPlays[tacticalStep].ad.x, top: tacticalPlays[tacticalStep].ad.y }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 h-7 w-7 rounded-full bg-orange-600 border border-orange-400 flex items-center justify-center text-[10px] font-black text-white shadow-lg transition-all duration-700 ease-out"
-                  >
-                    AD
-                  </div>
-
-                  {/* Player Pívot */}
-                  <div 
-                    style={{ left: tacticalPlays[tacticalStep].p.x, top: tacticalPlays[tacticalStep].p.y }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 h-7 w-7 rounded-full bg-orange-600 border border-orange-400 flex items-center justify-center text-[10px] font-black text-white shadow-lg transition-all duration-700 ease-out"
-                  >
-                    P
-                  </div>
-
-                  {/* Defensive Opponents represented as Triangles */}
-                  <div className="absolute top-[35%] left-[40%] -translate-x-1/2 -translate-y-1/2 h-0 w-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-red-500 opacity-60"></div>
-                  <div className="absolute top-[45%] left-[65%] -translate-x-1/2 -translate-y-1/2 h-0 w-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-red-500 opacity-60"></div>
-                  <div className="absolute top-[68%] left-[45%] -translate-x-1/2 -translate-y-1/2 h-0 w-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[10px] border-b-red-500 opacity-60"></div>
-
-                  {/* Tactical Soccer Ball */}
-                  <div 
-                    style={{ left: tacticalPlays[tacticalStep].ball.x, top: tacticalPlays[tacticalStep].ball.y }}
-                    className="absolute -translate-x-1/2 -translate-y-1/2 h-3.5 w-3.5 rounded-full bg-amber-400 border border-slate-900 shadow-md flex items-center justify-center text-[5px] transition-all duration-700 ease-out animate-spin"
-                  >
-                    ⚽
-                  </div>
-                </div>
-
-                {/* Play info box inside the court */}
-                <div className="mt-auto bg-slate-950/95 border border-slate-850 p-3 rounded-lg relative z-20 space-y-1">
-                  <h4 className="text-xs font-black text-white uppercase tracking-wider">{tacticalPlays[tacticalStep].title}</h4>
-                  <p className="text-[10px] sm:text-xs text-slate-300 leading-normal">{tacticalPlays[tacticalStep].desc}</p>
-                </div>
-
-              </div>
-            </div>
-
           </div>
         </div>
 
@@ -530,36 +287,61 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
           </div>
         </div>
 
-        {/* ================= LO QUE RECIBES (WHAT YOU GET) ================= */}
-        <div className="space-y-6">
-          <div className="text-center space-y-2">
-            <span className="text-xs font-bold font-mono text-orange-400 uppercase tracking-widest block">CONTENIDO DETALLADO</span>
-            <h2 className="text-2xl sm:text-3xl font-black text-white uppercase">¿Qué Recibes Exactamente con Tu Biblioteca?</h2>
-            <p className="text-xs sm:text-sm text-slate-400 max-w-2xl mx-auto">
-              Un desglose táctico diseñado quirúrgicamente para darte todos los recursos prácticos necesarios.
+        {/* ================= INTERACTIVE STRATEGY COURT PREVIEW ================= */}
+        <div className="bg-slate-950 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6 text-center flex flex-col items-center justify-center overflow-hidden">
+          <div className="space-y-3">
+            <span className="inline-flex items-center space-x-1.5 bg-orange-400/10 text-orange-400 border border-orange-400/20 px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider mx-auto">
+              🥅 SIMULADOR TÁCTICO INTEGRADO
+            </span>
+            <h3 className="text-xl sm:text-2xl font-black text-white uppercase max-w-xl mx-auto">
+              Visualiza el Movimiento Antes de la Cancha
+            </h3>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl mx-auto">
+              El manual desglosa las rotaciones mediante diagramas de campo exactos. Conoce cómo se estructuran las 4 fases de la jugada del sistema 3-1 presionando los botones de abajo.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {libraryContents.map((content, idx) => (
-              <div key={idx} className="bg-slate-950 border border-slate-850 p-6 rounded-2xl space-y-4">
-                <div className="flex items-center justify-between border-b border-slate-900 pb-3">
-                  <h3 className="text-base sm:text-lg font-black text-white uppercase">{content.title}</h3>
-                  <span className="text-[10px] bg-orange-500/10 border border-orange-500/30 text-orange-400 px-2.5 py-0.5 rounded font-mono font-bold uppercase tracking-wider">{content.badge}</span>
-                </div>
-                <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">{content.desc}</p>
-                <ul className="space-y-2 text-xs">
-                  {content.details.map((det, dIdx) => (
-                    <li key={dIdx} className="flex items-center space-x-2 text-slate-400">
-                      <span className="h-1.5 w-1.5 rounded-full bg-orange-400 flex-shrink-0"></span>
-                      <span>{det}</span>
-                    </li>
-                  ))}
-                </ul>
+          {/* Scrolling Gallery */}
+          <div className="w-full relative overflow-hidden py-4 select-none">
+            {/* Fade Overlays */}
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-20 md:w-32 bg-gradient-to-r from-slate-950 to-transparent z-10"></div>
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-20 md:w-32 bg-gradient-to-l from-slate-950 to-transparent z-10"></div>
+
+            {/* Marquee Wrapper */}
+            <div className="flex overflow-hidden">
+              <div className="animate-marquee flex gap-4 pr-4">
+                {/* First set of images */}
+                {previewImages.map((src, index) => (
+                  <div key={`set1-${index}`} className="flex-shrink-0 h-56 sm:h-72 md:h-80 aspect-[3/4] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl transition-all duration-300 hover:scale-[1.03] hover:border-orange-500/50">
+                    <img 
+                      src={src} 
+                      alt={`Manual Preview ${index + 1}`} 
+                      className="w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                ))}
+                {/* Second set of images for seamless infinite loop */}
+                {previewImages.map((src, index) => (
+                  <div key={`set2-${index}`} className="flex-shrink-0 h-56 sm:h-72 md:h-80 aspect-[3/4] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl transition-all duration-300 hover:scale-[1.03] hover:border-orange-500/50">
+                    <img 
+                      src={src} 
+                      alt={`Manual Preview Duplicate ${index + 1}`} 
+                      className="w-full h-full object-cover"
+                      referrerPolicy="no-referrer"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            <div className="text-[10px] sm:text-xs text-slate-500 font-medium tracking-wide mt-4 animate-pulse">
+              👋 Mantén presionado o coloca el cursor encima para pausar la vista
+            </div>
           </div>
         </div>
+
+
 
         {/* ================= SPECIAL SINGLE OPPORTUNITY PRICE BLOCK ================= */}
         <div id="oferta-exclusiva" className="bg-gradient-to-br from-orange-950 via-slate-950 to-orange-950 border-2 border-orange-500 rounded-3xl p-8 text-center relative overflow-hidden shadow-2xl space-y-6">
@@ -577,6 +359,20 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
             <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto">
               Esta oferta especial con descuento de lanzamiento solo está disponible en esta página y desaparecerá de forma permanente cuando la cierres.
             </p>
+            <div className="mt-4 flex justify-center">
+              <button 
+                onClick={onAccept}
+                className="cursor-pointer transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] focus:outline-none"
+                title="Aceptar Oferta Especial"
+              >
+                <img 
+                  src="https://i.ibb.co/bg1G7vh5/Chat-GPT-Image-25-de-jun-de-2026-14-12-49.png" 
+                  alt="Oferta Especial Hotmart" 
+                  className="max-w-full sm:max-w-lg rounded-2xl shadow-2xl border border-white/10 object-contain"
+                  referrerPolicy="no-referrer"
+                />
+              </button>
+            </div>
           </div>
 
           {/* Pricing container */}
@@ -605,10 +401,13 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
             </p>
           </div>
 
-          {/* Checkout & reject buttons */}
-          <div className="max-w-xl mx-auto space-y-4">
-            {/* HOTMART - Sales Funnel Widget */}
+          {/* HOTMART - Sales Funnel Widget */}
+          <div className="w-full flex justify-center py-4">
             <div id="hotmart-sales-funnel" className="w-full flex justify-center min-h-[80px]"></div>
+          </div>
+
+          {/* Checkout & reject buttons */}
+          <div className="max-w-xl mx-auto space-y-6 flex flex-col items-center">
           </div>
 
           {/* SSL and security indicators */}
