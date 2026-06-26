@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   ShieldCheck, 
   BookOpen, 
@@ -42,6 +42,81 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
   const [selectedTopic, setSelectedModule] = useState(0);
   const [tacticalStep, setTacticalStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const isDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+
+  // Auto-scrolling marquee with wrap-around support
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    let animationFrameId: number;
+    let lastTime = performance.now();
+    const scrollSpeed = 120; // speed of auto scrolling in pixels per second
+
+    const step = (time: number) => {
+      if (!isUserInteracting && !isDownRef.current) {
+        const delta = (time - lastTime) / 1000;
+        container.scrollLeft += scrollSpeed * delta;
+
+        // Seamless wrap-around
+        const halfWidth = container.scrollWidth / 2;
+        if (container.scrollLeft >= halfWidth) {
+          container.scrollLeft -= halfWidth;
+        }
+      }
+      lastTime = time;
+      animationFrameId = requestAnimationFrame(step);
+    };
+
+    animationFrameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isUserInteracting]);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    isDownRef.current = true;
+    setIsUserInteracting(true);
+    startXRef.current = e.pageX - container.offsetLeft;
+    scrollLeftRef.current = container.scrollLeft;
+  };
+
+  const handleMouseLeave = () => {
+    isDownRef.current = false;
+    setIsUserInteracting(false);
+  };
+
+  const handleMouseUp = () => {
+    isDownRef.current = false;
+    setTimeout(() => {
+      setIsUserInteracting(false);
+    }, 1200);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDownRef.current) return;
+    e.preventDefault();
+    const container = scrollContainerRef.current;
+    if (!container) return;
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startXRef.current) * 1.5; // Drag speed modifier
+    container.scrollLeft = scrollLeftRef.current - walk;
+  };
+
+  const handleTouchStart = () => {
+    setIsUserInteracting(true);
+  };
+
+  const handleTouchEnd = () => {
+    setTimeout(() => {
+      setIsUserInteracting(false);
+    }, 1200);
+  };
 
   // Auto-play the tactical animation demo
   useEffect(() => {
@@ -199,16 +274,6 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
 
             <div className="text-center space-y-2 w-full flex flex-col items-center">
               <span className="text-[11px] text-orange-400 font-mono font-bold uppercase tracking-widest block">📘 SISTEMA DIGITAL INSTANTÁNEO</span>
-              
-              <div className="pt-3 w-full">
-                <a 
-                  href="#oferta-exclusiva"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-orange-600 via-amber-500 to-orange-600 text-white font-black px-6 py-3.5 rounded-xl text-xs uppercase tracking-widest hover:brightness-110 active:scale-[0.98] transition-all shadow-lg shadow-orange-500/20 cursor-pointer border border-orange-400/20 text-center"
-                >
-                  <Check className="h-4 w-4 text-white stroke-[3px]" />
-                  <span>Sí, Quiero Acceder Ahora</span>
-                </a>
-              </div>
             </div>
           </div>
 
@@ -307,36 +372,43 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
             <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-20 md:w-32 bg-gradient-to-r from-slate-950 to-transparent z-10"></div>
             <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-20 md:w-32 bg-gradient-to-l from-slate-950 to-transparent z-10"></div>
 
-            {/* Marquee Wrapper */}
-            <div className="flex overflow-hidden">
-              <div className="animate-marquee flex gap-4 pr-4">
-                {/* First set of images */}
-                {previewImages.map((src, index) => (
-                  <div key={`set1-${index}`} className="flex-shrink-0 h-56 sm:h-72 md:h-80 aspect-[3/4] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl transition-all duration-300 hover:scale-[1.03] hover:border-orange-500/50">
-                    <img 
-                      src={src} 
-                      alt={`Manual Preview ${index + 1}`} 
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                ))}
-                {/* Second set of images for seamless infinite loop */}
-                {previewImages.map((src, index) => (
-                  <div key={`set2-${index}`} className="flex-shrink-0 h-56 sm:h-72 md:h-80 aspect-[3/4] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl transition-all duration-300 hover:scale-[1.03] hover:border-orange-500/50">
-                    <img 
-                      src={src} 
-                      alt={`Manual Preview Duplicate ${index + 1}`} 
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                  </div>
-                ))}
-              </div>
+            {/* Marquee Wrapper with Drag & Touch Support */}
+            <div 
+              ref={scrollContainerRef}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              className="flex overflow-x-auto scrollbar-none gap-4 pr-4 cursor-grab active:cursor-grabbing scroll-smooth"
+            >
+              {/* First set of images */}
+              {previewImages.map((src, index) => (
+                <div key={`set1-${index}`} className="flex-shrink-0 h-[420px] sm:h-[580px] md:h-[680px] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-orange-500/50 bg-slate-900/50">
+                  <img 
+                    src={src} 
+                    alt={`Manual Preview ${index + 1}`} 
+                    className="h-full w-auto object-contain pointer-events-none"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              ))}
+              {/* Second set of images for seamless infinite loop */}
+              {previewImages.map((src, index) => (
+                <div key={`set2-${index}`} className="flex-shrink-0 h-[420px] sm:h-[580px] md:h-[680px] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-orange-500/50 bg-slate-900/50">
+                  <img 
+                    src={src} 
+                    alt={`Manual Preview Duplicate ${index + 1}`} 
+                    className="h-full w-auto object-contain pointer-events-none"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+              ))}
             </div>
 
             <div className="text-[10px] sm:text-xs text-slate-500 font-medium tracking-wide mt-4 animate-pulse">
-              👋 Mantén presionado o coloca el cursor encima para pausar la vista
+              👋 Arrastra con el cursor o desliza con el dedo para navegar
             </div>
           </div>
         </div>

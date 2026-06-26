@@ -16,6 +16,14 @@ body {
   color: #0f172a; /* Slate 900 */
 }
 
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-none {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 @keyframes marquee {
   0% {
     transform: translateX(0);
@@ -28,7 +36,7 @@ body {
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 55s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 .animate-marquee:hover {
