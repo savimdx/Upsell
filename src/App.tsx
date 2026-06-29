@@ -29,6 +29,7 @@ export default function App() {
 
   // Shared countdown ticking sync
   useEffect(() => {
+    document.title = "Entrenamientos de Fútbol";
     const timer = setInterval(() => {
       setTimeLeftSticky((prev) => {
         if (prev <= 1) {
