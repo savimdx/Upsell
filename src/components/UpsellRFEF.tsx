@@ -430,18 +430,12 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
               Esta oferta especial con descuento de lanzamiento solo está disponible en esta página y desaparecerá de forma permanente cuando la cierres.
             </p>
             <div className="mt-4 flex justify-center">
-              <button 
-                onClick={onAccept}
-                className="cursor-pointer transition-transform duration-300 hover:scale-[1.02] active:scale-[0.98] focus:outline-none"
-                title="Aceptar Oferta Especial"
-              >
-                <img 
-                  src="https://i.ibb.co/bg1G7vh5/Chat-GPT-Image-25-de-jun-de-2026-14-12-49.png" 
-                  alt="Oferta Especial Hotmart" 
-                  className="max-w-full sm:max-w-lg rounded-2xl shadow-2xl border border-white/10 object-contain"
-                  referrerPolicy="no-referrer"
-                />
-              </button>
+              <img 
+                src="https://i.ibb.co/bg1G7vh5/Chat-GPT-Image-25-de-jun-de-2026-14-12-49.png" 
+                alt="Oferta Especial Hotmart" 
+                className="max-w-full sm:max-w-lg rounded-2xl shadow-2xl border border-white/10 object-contain"
+                referrerPolicy="no-referrer"
+              />
             </div>
           </div>
 
