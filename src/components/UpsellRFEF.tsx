@@ -136,18 +136,20 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
     let script = document.getElementById(scriptId) as HTMLScriptElement;
 
     const initWidget = () => {
-      if ((window as any).checkoutElements) {
+      const checkoutElements = (window as any).checkoutElements;
+      const container = document.getElementById('hotmart-sales-funnel');
+      if (checkoutElements && container) {
         try {
-          // Clear any existing contents just in case
-          const container = document.getElementById('hotmart-sales-funnel');
-          if (container) {
-            container.innerHTML = '';
-          }
-          (window as any).checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
+          container.innerHTML = ''; // Clear container before mounting to prevent duplicates
+          checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel');
         } catch (err) {
           console.error("Error initializing Hotmart widget:", err);
         }
       }
+    };
+
+    const handleInitWithDelay = () => {
+      setTimeout(initWidget, 150);
     };
 
     if (!script) {
@@ -155,27 +157,32 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
       script.id = scriptId;
       script.src = "https://checkout.hotmart.com/lib/hotmart-checkout-elements.js";
       script.async = true;
-      script.onload = () => {
-        initWidget();
-      };
+      script.onload = handleInitWithDelay;
       document.body.appendChild(script);
     } else {
-      // Script is already in DOM, check if checkoutElements exists and init
       if ((window as any).checkoutElements) {
-        // Give a tiny timeout for DOM to render the container
-        const timer = setTimeout(initWidget, 50);
-        return () => clearTimeout(timer);
+        handleInitWithDelay();
       } else {
-        script.addEventListener('load', initWidget);
+        script.addEventListener('load', handleInitWithDelay);
       }
     }
 
+    const interval = setInterval(() => {
+      if ((window as any).checkoutElements && document.getElementById('hotmart-sales-funnel')) {
+        initWidget();
+        clearInterval(interval);
+      }
+    }, 200);
+
     return () => {
+      clearInterval(interval);
       if (script) {
-        script.removeEventListener('load', initWidget);
+        script.removeEventListener('load', handleInitWithDelay);
       }
     };
   }, []);
+
+
 
   const tacticalPlays = [
     {
@@ -403,12 +410,8 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
           </div>
 
           {/* HOTMART - Sales Funnel Widget */}
-          <div className="w-full flex justify-center py-4">
-            <div id="hotmart-sales-funnel" className="w-full flex justify-center min-h-[80px]"></div>
-          </div>
-
-          {/* Checkout & reject buttons */}
-          <div className="max-w-xl mx-auto space-y-6 flex flex-col items-center">
+          <div className="max-w-md mx-auto space-y-4 pt-4">
+            <div id="hotmart-sales-funnel" className="w-full min-h-[120px] flex justify-center py-4 bg-slate-900/40 rounded-2xl border border-white/5"></div>
           </div>
 
           {/* SSL and security indicators */}
