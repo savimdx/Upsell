@@ -353,63 +353,7 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
           </div>
         </div>
 
-        {/* ================= INTERACTIVE STRATEGY COURT PREVIEW ================= */}
-        <div className="bg-slate-950 border border-slate-850 rounded-3xl p-6 sm:p-8 space-y-6 text-center flex flex-col items-center justify-center overflow-hidden">
-          <div className="space-y-3">
-            <span className="inline-flex items-center space-x-1.5 bg-orange-400/10 text-orange-400 border border-orange-400/20 px-3 py-1 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider mx-auto">
-              🥅 SIMULADOR TÁCTICO INTEGRADO
-            </span>
-            <h3 className="text-xl sm:text-2xl font-black text-white uppercase max-w-xl mx-auto">
-              Visualiza el Movimiento Antes de la Cancha
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl mx-auto">
-              El manual desglosa las rotaciones mediante diagramas de campo exactos. Conoce cómo se estructuran las 4 fases de la jugada del sistema 3-1 presionando los botones de abajo.
-            </p>
-          </div>
 
-          {/* Scrolling Gallery */}
-          <div className="w-full relative overflow-hidden py-4 select-none">
-            {/* Fade Overlays */}
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-12 sm:w-20 md:w-32 bg-gradient-to-r from-slate-950 to-transparent z-10"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-12 sm:w-20 md:w-32 bg-gradient-to-l from-slate-950 to-transparent z-10"></div>
-
-            {/* Marquee Wrapper with Drag & Touch Support */}
-            <div 
-              ref={scrollContainerRef}
-              onMouseEnter={handleMouseEnter}
-              onMouseDown={handleMouseDown}
-              onMouseLeave={handleMouseLeave}
-              onMouseUp={handleMouseUp}
-              onMouseMove={handleMouseMove}
-              onTouchStart={handleTouchStart}
-              onTouchEnd={handleTouchEnd}
-              className="flex overflow-x-auto scrollbar-none gap-4 pr-4 cursor-grab active:cursor-grabbing scroll-smooth"
-            >
-              {/* First set of images */}
-              {previewImages.map((src, index) => (
-                <div key={`set1-${index}`} className="flex-shrink-0 h-[420px] sm:h-[580px] md:h-[680px] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-orange-500/50 bg-slate-900/50">
-                  <img 
-                    src={src} 
-                    alt={`Manual Preview ${index + 1}`} 
-                    className="h-full w-auto object-contain pointer-events-none"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-              ))}
-              {/* Second set of images for seamless infinite loop */}
-              {previewImages.map((src, index) => (
-                <div key={`set2-${index}`} className="flex-shrink-0 h-[420px] sm:h-[580px] md:h-[680px] overflow-hidden rounded-2xl border border-slate-800 shadow-2xl transition-all duration-300 hover:scale-[1.02] hover:border-orange-500/50 bg-slate-900/50">
-                  <img 
-                    src={src} 
-                    alt={`Manual Preview Duplicate ${index + 1}`} 
-                    className="h-full w-auto object-contain pointer-events-none"
-                    referrerPolicy="no-referrer"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
 
 
 
@@ -429,14 +373,7 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
             <p className="text-xs sm:text-sm text-slate-400 max-w-xl mx-auto">
               Esta oferta especial con descuento de lanzamiento solo está disponible en esta página y desaparecerá de forma permanente cuando la cierres.
             </p>
-            <div className="mt-4 flex justify-center">
-              <img 
-                src="https://i.ibb.co/bg1G7vh5/Chat-GPT-Image-25-de-jun-de-2026-14-12-49.png" 
-                alt="Oferta Especial Hotmart" 
-                className="max-w-full sm:max-w-lg rounded-2xl shadow-2xl border border-white/10 object-contain"
-                referrerPolicy="no-referrer"
-              />
-            </div>
+
           </div>
 
           {/* Pricing container */}
