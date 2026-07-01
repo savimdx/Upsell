@@ -24,24 +24,13 @@ import {
   Activity,
   FileText
 } from 'lucide-react';
-import { useCurrency } from '../context/CurrencyContext';
-
-
 
 interface UpsellRFEFProps {
   onAccept: () => void;
   onDecline: () => void;
 }
 
-const previewImages = [
-  "https://i.ibb.co/s98XHnxN/Screenshot-20260626-130203-Adobe-Acrobat.jpg",
-  "https://i.ibb.co/FbbFn9Ft/Screenshot-20260626-130208-Adobe-Acrobat.jpg",
-  "https://i.ibb.co/FbNbq0cV/Screenshot-20260626-130250-Adobe-Acrobat.jpg",
-  "https://i.ibb.co/7drfv4kn/Screenshot-20260626-130419-Adobe-Acrobat.jpg"
-];
-
 export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
-  const { formatPrice, formatPriceNoSymbol, currencyCode, currencySymbol } = useCurrency();
   const [selectedTopic, setSelectedModule] = useState(0);
   const [tacticalStep, setTacticalStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -389,26 +378,28 @@ export default function UpsellRFEF({ onAccept, onDecline }: UpsellRFEFProps) {
           {/* Pricing container */}
           <div className="max-w-md mx-auto py-6 border-y-2 border-white/5 space-y-4">
             
+
             {/* Price anchors */}
             <div className="flex items-center justify-center gap-4 text-xs sm:text-sm font-semibold text-slate-400">
-              <span className="text-slate-400 flex items-center gap-1">Valor Oficial: <span className="line-through text-red-400 font-extrabold">{formatPrice(97.00)}</span></span>
+              <span className="text-slate-400 flex items-center gap-1">Valor Oficial: <span className="line-through text-red-400 font-extrabold">$97.00</span></span>
               <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-mono font-bold uppercase text-[10px] tracking-wider animate-pulse">
-                Ahorras {formatPrice(91.10)}
+                Ahorras $91.10
               </span>
             </div>
 
             {/* Price Callout */}
             <div className="flex items-baseline justify-center">
-              <span className="text-2xl sm:text-3xl font-extrabold text-orange-500 mr-1">
-                {currencySymbol}
-              </span>
               <span className="text-6xl sm:text-7xl font-black text-orange-400 tracking-tight drop-shadow-sm animate-pulse">
-                {formatPriceNoSymbol(5.90)}
+                $5.90
               </span>
-              <span className="text-xl font-bold text-orange-500 ml-2.5 font-mono">
-                {currencyCode}
+              <span className="text-xl font-bold text-orange-500 ml-1.5 font-mono">
+                USD
               </span>
             </div>
+
+            <p className="text-xs text-slate-400 font-medium">
+              (Puede pagar en su moneda local)
+            </p>
 
             <p className="text-[10px] text-slate-500 leading-tight font-mono">
               PAGO ÚNICO • ACCESO DIGITAL COMPLETO • DESCARGA DE INMEDIATO

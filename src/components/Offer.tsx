@@ -1,17 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { PLANS_DATA } from '../copywritingData';
 import { Check, Flame, Clock, Sparkles } from 'lucide-react';
-import { useCurrency } from '../context/CurrencyContext';
 
 export default function Offer({ onPurchase }: { onPurchase?: () => void }) {
-  const { formatPrice, formatPriceNoSymbol, currencyCode, currencySymbol } = useCurrency();
-  
-  const formatTextWithPrices = (text: string) => {
-    return text.replace(/\$(\d+(?:\.\d+)?)/g, (match, p1) => {
-      return formatPrice(parseFloat(p1));
-    });
-  };
-
   // 30 minutes in seconds = 1800
   const [timeLeft, setTimeLeft] = useState(1800);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
@@ -96,7 +87,7 @@ export default function Offer({ onPurchase }: { onPurchase?: () => void }) {
                   <li key={i} className="flex items-start space-x-3">
                     <Check className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
                     <span className="font-extrabold text-slate-900">
-                      {formatTextWithPrices(benefit)}
+                      {benefit}
                     </span>
                   </li>
                 ))}
@@ -111,7 +102,7 @@ export default function Offer({ onPurchase }: { onPurchase?: () => void }) {
                 <div className="flex items-center justify-center gap-2.5">
                   <div className="flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-400">
                     <span>Antes</span>
-                    <span className="font-extrabold text-red-500 line-through">{formatPrice(155.00)}</span>
+                    <span className="font-extrabold text-red-500 line-through">$155.00 USD</span>
                   </div>
                   <span className="text-[10px] sm:text-[11px] font-black text-emerald-700 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-md uppercase tracking-wider leading-none">
                     90% Dto.
@@ -120,20 +111,17 @@ export default function Offer({ onPurchase }: { onPurchase?: () => void }) {
 
                 {/* Main Price */}
                 <div className="flex items-baseline justify-center">
-                  <span className="text-3xl sm:text-4xl font-extrabold text-orange-500 mr-1.5 font-sans">
-                    {currencySymbol}
-                  </span>
                   <span className="text-6xl sm:text-7xl font-black text-orange-600 tracking-tight drop-shadow-sm">
-                    {formatPriceNoSymbol(6.90)}
+                    $6.90
                   </span>
-                  <span className="text-lg sm:text-xl font-extrabold text-orange-500 ml-2.5 font-sans">
-                    {currencyCode}
+                  <span className="text-lg sm:text-xl font-extrabold text-orange-500 ml-1.5 font-sans">
+                    USD
                   </span>
                 </div>
 
                 {/* Currency disclaimer */}
                 <span className="text-[11px] sm:text-xs text-slate-500 font-medium">
-                  (Equivalente local aproximado • Puede pagar en su moneda local)
+                  (Puede pagar en su moneda local)
                 </span>
               </div>
 
@@ -184,7 +172,7 @@ export default function Offer({ onPurchase }: { onPurchase?: () => void }) {
                   <span>¡OFERTA DE ÚLTIMA HORA!</span>
                 </span>
                 <h3 className="text-base sm:text-lg md:text-xl font-bold tracking-tight leading-tight select-none">
-                  ¡Sube al Plan Premium por solo {formatPrice(2.50)} más!
+                  ¡Sube al Plan Premium por solo $2.50 USD más!
                 </h3>
               </div>
 
@@ -195,8 +183,8 @@ export default function Offer({ onPurchase }: { onPurchase?: () => void }) {
                 <div className="bg-gradient-to-br from-orange-50 to-amber-50 border border-orange-200 rounded-2xl p-4 text-center shadow-sm">
                   <div className="text-[10px] sm:text-xs font-extrabold text-orange-600 uppercase tracking-widest mb-1">OFERTA DE ACTUALIZACIÓN</div>
                   <div className="flex items-center justify-center gap-2 sm:gap-3">
-                    <span className="text-xs sm:text-sm font-semibold text-slate-400 line-through">Antes: {formatPrice(15.00)}</span>
-                    <span className="text-lg sm:text-2xl font-black text-orange-600">¡Tu Precio: {formatPrice(7.50)}!</span>
+                    <span className="text-xs sm:text-sm font-semibold text-slate-400 line-through">Antes: $15.00 USD</span>
+                    <span className="text-lg sm:text-2xl font-black text-orange-600">¡Tu Precio: $7.50 USD!</span>
                   </div>
                 </div>
 
@@ -240,7 +228,7 @@ export default function Offer({ onPurchase }: { onPurchase?: () => void }) {
                     className="w-full flex items-center justify-center space-x-2 px-4 py-4 sm:py-4.5 rounded-xl bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500 hover:brightness-110 active:scale-[0.98] transition-all text-white font-black text-xs sm:text-sm md:text-base tracking-wide uppercase shadow-lg cursor-pointer transform duration-150 animate-pulse"
                   >
                     <Sparkles className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
-                    <span>SÍ, ¡QUIERO EL PREMIUM POR {formatPrice(7.50)}!</span>
+                    <span>SÍ, ¡QUIERO EL PREMIUM POR $7.50 USD!</span>
                   </button>
 
                   <button
@@ -250,7 +238,7 @@ export default function Offer({ onPurchase }: { onPurchase?: () => void }) {
                     }}
                     className="w-full py-3.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-extrabold text-xs tracking-wide uppercase transition-colors cursor-pointer text-center"
                   >
-                    No, gracias. Continuar al Plan Básico ({formatPrice(5.00)})
+                    No, gracias. Continuar al Plan Básico ($5.00 USD)
                   </button>
                 </div>
 

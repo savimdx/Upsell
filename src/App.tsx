@@ -22,12 +22,10 @@ import Footer from './components/Footer';
 import SalesNotification from './components/SalesNotification';
 import UpsellRFEF from './components/UpsellRFEF';
 import { Clock, CheckCircle2, Download, ShoppingCart, Sparkles, BookOpen, ChevronRight, HelpCircle } from 'lucide-react';
-import { useCurrency } from './context/CurrencyContext';
 
 export default function App() {
   const [timeLeftSticky, setTimeLeftSticky] = useState(1800); // 30 mins matching the Offer timer
   const [viewMode, setViewMode] = useState<'upsell' | 'thankyou_accepted' | 'thankyou_declined'>('upsell');
-  const { formatPrice } = useCurrency();
 
 
   // Shared countdown ticking sync
@@ -106,7 +104,7 @@ export default function App() {
                     <span className="text-emerald-500">✓</span>
                     <span>Megapack +1000 Sesiones de Fútbol Sala</span>
                   </div>
-                  <span className="font-bold font-mono text-slate-400">{formatPrice(6.90)}</span>
+                  <span className="font-bold font-mono text-slate-400">$6.90 USD</span>
                 </li>
 
                 {viewMode === 'thankyou_accepted' ? (
@@ -115,7 +113,7 @@ export default function App() {
                       <Sparkles className="h-4 w-4 text-amber-400 flex-shrink-0 animate-pulse" />
                       <span className="font-bold">98 Sesiones de Entrenamiento de la Selección Española Campeona del Mundo 2010</span>
                     </div>
-                    <span className="font-black font-mono text-amber-300">{formatPrice(5.90)}</span>
+                    <span className="font-black font-mono text-amber-300">$5.90 USD</span>
                   </li>
                 ) : (
                   <li className="flex justify-between items-center text-slate-500 italic p-1 border-t border-slate-850/60 pt-2.5">
@@ -131,7 +129,7 @@ export default function App() {
               <div className="border-t border-slate-850 pt-3 flex justify-between items-center font-bold text-white text-sm sm:text-base">
                 <span>Total Cargado:</span>
                 <span className="font-mono text-amber-400 text-lg sm:text-xl">
-                  {viewMode === 'thankyou_accepted' ? formatPrice(12.80) : formatPrice(6.90)}
+                  {viewMode === 'thankyou_accepted' ? '$12.80 USD' : '$6.90 USD'}
                 </span>
               </div>
             </div>
